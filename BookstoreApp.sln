@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstoreApp.Persistense", "src\Infrastructure\BookstoreApp.Persistense\BookstoreApp.Persistense.csproj", "{3E70D6FF-318F-4A6F-A84D-7CC08CECDF43}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2492742F-253C-4583-9B32-F253332A9F52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstoreApp.UnitTests", "tests\BookstoreApp.UnitTests\BookstoreApp.UnitTests.csproj", "{783A1A1F-85C9-40B5-9C1C-E35BA9398DAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,10 @@ Global
 		{3E70D6FF-318F-4A6F-A84D-7CC08CECDF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E70D6FF-318F-4A6F-A84D-7CC08CECDF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E70D6FF-318F-4A6F-A84D-7CC08CECDF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{783A1A1F-85C9-40B5-9C1C-E35BA9398DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{783A1A1F-85C9-40B5-9C1C-E35BA9398DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{783A1A1F-85C9-40B5-9C1C-E35BA9398DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{783A1A1F-85C9-40B5-9C1C-E35BA9398DAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C02DDF62-6DB3-42F1-8F73-A1657C8D0602} = {1A0FE526-99D3-4829-B13F-4BC4E0843C9A}
@@ -53,5 +61,6 @@ Global
 		{6D2137C7-45E0-4A5F-92CF-9EFD42FF513F} = {C99B8E24-82EF-48D4-AFF5-67E0B8FF48D2}
 		{25F91DD4-14DA-423C-9689-648C331E0A1F} = {1A0FE526-99D3-4829-B13F-4BC4E0843C9A}
 		{3E70D6FF-318F-4A6F-A84D-7CC08CECDF43} = {25F91DD4-14DA-423C-9689-648C331E0A1F}
+		{783A1A1F-85C9-40B5-9C1C-E35BA9398DAF} = {2492742F-253C-4583-9B32-F253332A9F52}
 	EndGlobalSection
 EndGlobal
