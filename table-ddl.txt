@@ -1,0 +1,10 @@
+CREATE TABLE public.books (
+	id uuid NULL,
+	title varchar NULL,
+	description varchar NULL,
+	author varchar NULL,
+	pages_count int4 NULL,
+	status varchar NULL,
+	user_name varchar NULL,
+	booked_to date NULL
+);
