@@ -20,8 +20,8 @@ public interface IBookRepository
     Task AddBookAsync(Book book, CancellationToken cancellationToken = default);
     Task UpdateStatusAsync(
         Book book,
-        string userName,
-        DateTime date,
+        string? userName,
+        DateTime? date,
         CancellationToken cancellationToken = default
     );
 
