@@ -1,6 +1,6 @@
-namespace BookstoreApp.Application.Features.Books;
+namespace BookstoreApp.Persistense.Daos;
 
-public class BookDto
+public class BookDao
 {
     public Guid Id { get; set; }
     public string? Title { get; set; }
@@ -8,6 +8,6 @@ public class BookDto
     public string? Author { get; set; }
     public int PagesCount { get; set; }
     public string Status { get; set; } = "Free";
-    public string? UserName { get; set; }
-    public DateTime? BookedTo { get; set; }
+    public string? UserName { get; set; } 
+    public DateTime? BookedTo { get; set;   }
 }

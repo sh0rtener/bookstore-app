@@ -22,6 +22,7 @@ public class RentedBook : Book
             throw new InvalidUsernameException();
 
         UserName = userName;
+        Status = BookStatus.Rent;
     }
 
     public override BookedBook Booking(string userName, DateTime date) =>

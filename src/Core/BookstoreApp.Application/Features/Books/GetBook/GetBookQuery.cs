@@ -4,33 +4,45 @@ using BookstoreApp.Domain.Books;
 
 namespace BookstoreApp.Application.Features.Books.GetBook;
 
-public class GetBookCommand : ICommand<BookDto>
+public class GetBookQuery : IQuery<BookDto>
 {
     public Guid Id { get; set; }
 
-    public GetBookCommand(Guid id)
+    public GetBookQuery(Guid id)
     {
         Id = id;
     }
 }
 
-public class GetBookCommandHandler : ICommandHandler<GetBookCommand, BookDto>
+public class GetBookQueryHandler : IQueryHandler<GetBookQuery, BookDto>
 {
     private readonly IBookRepository _bookRepository;
 
-    public GetBookCommandHandler(IBookRepository bookRepository)
+    public GetBookQueryHandler(IBookRepository bookRepository)
     {
         _bookRepository = bookRepository;
     }
 
     public async Task<BookDto> Handle(
-        GetBookCommand command,
+        GetBookQuery command,
         CancellationToken cancellationToken = default
     )
     {
         var book =
             await _bookRepository.GetBookAsync(command.Id, cancellationToken)
             ?? throw new BookWasntFoundException(command.Id);
+
+        string? username = null;
+        DateTime? bookedDate = null;
+
+        if (book.GetType() == typeof(RentedBook))
+            username = ((RentedBook)book).UserName;
+
+        if (book.GetType() == typeof(Domain.Books.BookedBook))
+        {
+            username = ((Domain.Books.BookedBook)book).UserName;
+            bookedDate = ((Domain.Books.BookedBook)book).BookedTo;
+        }
 
         return new()
         {
@@ -40,6 +52,8 @@ public class GetBookCommandHandler : ICommandHandler<GetBookCommand, BookDto>
             Description = book.Description,
             PagesCount = book.PagesCount,
             Status = book.Status.Name,
+            UserName = username,
+            BookedTo = bookedDate,
         };
     }
 }

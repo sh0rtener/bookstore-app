@@ -16,6 +16,6 @@ public class FreeBook : Book
 
     public override RentedBook Rent(string userName)
     {
-        throw new NotImplementedException();
+        return new(Title, Description, PagesCount, Author, userName) { Id = Id };
     }
 }

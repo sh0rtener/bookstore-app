@@ -7,6 +7,6 @@ public class IsSatisfiedBookDescription : Specification<string>
 {
     public override Expression<Func<string, bool>> ToExpression()
     {
-        throw new NotImplementedException();
+        return x => true;
     }
 }

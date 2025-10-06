@@ -17,12 +17,10 @@ public class FreeBookCommand : ICommand
 
 public class FreeBookCommandHandler : ICommandHandler<FreeBookCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IBookRepository _bookRepository;
 
-    public FreeBookCommandHandler(IUnitOfWork unitOfWork, IBookRepository bookRepository)
+    public FreeBookCommandHandler(IBookRepository bookRepository)
     {
-        _unitOfWork = unitOfWork;
         _bookRepository = bookRepository;
     }
 
@@ -33,8 +31,6 @@ public class FreeBookCommandHandler : ICommandHandler<FreeBookCommand>
             ?? throw new BookWasntFoundException(command.BookId);
 
         var bookedBook = book.Free();
-        _unitOfWork.Begin();
         await _bookRepository.UpdateStatusAsync(bookedBook, null, null, cancellationToken);
-        await _unitOfWork.CommitAsync(cancellationToken);
     }
 }

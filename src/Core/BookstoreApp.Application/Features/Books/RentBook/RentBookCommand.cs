@@ -19,12 +19,10 @@ public class RentBookCommand : ICommand
 
 public class RentBookCommandHandler : ICommandHandler<RentBookCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IBookRepository _bookRepository;
 
-    public RentBookCommandHandler(IUnitOfWork unitOfWork, IBookRepository bookRepository)
+    public RentBookCommandHandler(IBookRepository bookRepository)
     {
-        _unitOfWork = unitOfWork;
         _bookRepository = bookRepository;
     }
 
@@ -35,13 +33,11 @@ public class RentBookCommandHandler : ICommandHandler<RentBookCommand>
             ?? throw new BookWasntFoundException(command.BookId);
 
         var rentedBook = book.Rent(command.UserName);
-        _unitOfWork.Begin();
         await _bookRepository.UpdateStatusAsync(
             rentedBook,
             command.UserName,
             null,
             cancellationToken
         );
-        await _unitOfWork.CommitAsync(cancellationToken);
     }
 }

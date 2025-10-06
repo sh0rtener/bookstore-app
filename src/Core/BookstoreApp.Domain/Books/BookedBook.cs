@@ -32,6 +32,7 @@ public class BookedBook : Book
 
         UserName = userName;
         BookedTo = bookedTo;
+        Status = BookStatus.Booked;
     }
 
     public override BookedBook Booking(string userName, DateTime date) =>

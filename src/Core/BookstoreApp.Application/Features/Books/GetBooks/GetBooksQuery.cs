@@ -3,27 +3,27 @@ using BookstoreApp.Domain.Books;
 
 namespace BookstoreApp.Application.Features.Books.GetBooks;
 
-public class GetBooksCommand : ICommand<IEnumerable<BookDto>>
+public class GetBooksQuery : IQuery<IEnumerable<BookDto>>
 {
-    public required BookFilter Filter { get; set; }
+    public BookFilter Filter { get; set; }
 
-    public GetBooksCommand(BookFilter filter)
+    public GetBooksQuery(BookFilter filter)
     {
         Filter = filter;
     }
 }
 
-public class GetBooksCommandHandler : ICommandHandler<GetBooksCommand, IEnumerable<BookDto>>
+public class GetBooksQueryHandler : IQueryHandler<GetBooksQuery, IEnumerable<BookDto>>
 {
     private readonly IBookRepository _bookRepository;
 
-    public GetBooksCommandHandler(IBookRepository bookRepository)
+    public GetBooksQueryHandler(IBookRepository bookRepository)
     {
         _bookRepository = bookRepository;
     }
 
     public async Task<IEnumerable<BookDto>> Handle(
-        GetBooksCommand command,
+        GetBooksQuery command,
         CancellationToken cancellationToken = default
     )
     {

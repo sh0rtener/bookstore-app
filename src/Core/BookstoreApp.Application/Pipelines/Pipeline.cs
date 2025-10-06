@@ -3,12 +3,12 @@ namespace BookstoreApp.Application.Pipelines;
 public class Pipeline : IPipeline
 {
     private readonly List<IPipelineBefore>? _pipelineBefores = [];
-    private readonly Dictionary<Type, ICommandHandler<ICommand>>? _commands;
+    private readonly Dictionary<Type, ICommandHandlerBase>? _commands;
     private readonly Dictionary<Type, IQueryHandlerBase>? _queries;
 
     public Pipeline(
         List<IPipelineBefore>? pipelineBefores = null,
-        Dictionary<Type, ICommandHandler<ICommand>>? commands = null,
+        Dictionary<Type, ICommandHandlerBase>? commands = null,
         Dictionary<Type, IQueryHandlerBase>? queries = null
     )
     {
@@ -50,7 +50,8 @@ public class Pipeline : IPipeline
         if (!_commands.ContainsKey(command.GetType()))
             throw new InvalidCastException("Ошибка с пайплайнами. Команда не найдена");
 
-        await _commands[command.GetType()].Handle(command, cancellationToken);
+        dynamic handler = _commands[command.GetType()];
+        await handler.Handle((dynamic)command, cancellationToken);
     }
 
     public async Task<TResult> Send<TResult>(
@@ -80,7 +81,8 @@ public class Pipeline : IPipeline
         if (!_queries.ContainsKey(query.GetType()))
             throw new InvalidCastException("Ошибка с пайплайнами. Запрос не найден");
 
-        await ((IQueryHandler<IQuery>)_queries[query.GetType()]).Handle(query, cancellationToken);
+        dynamic handler = _queries[query.GetType()];
+        await handler.Handle((dynamic)query, cancellationToken);
     }
 
     public async Task<TResult> Send<TResult>(

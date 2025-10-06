@@ -17,12 +17,10 @@ public class RemoveBookCommand : ICommand
 
 public class RemoveBookCommandHandler : ICommandHandler<RemoveBookCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IBookRepository _bookRepository;
 
-    public RemoveBookCommandHandler(IUnitOfWork unitOfWork, IBookRepository bookRepository)
+    public RemoveBookCommandHandler(IBookRepository bookRepository)
     {
-        _unitOfWork = unitOfWork;
         _bookRepository = bookRepository;
     }
 
@@ -31,8 +29,6 @@ public class RemoveBookCommandHandler : ICommandHandler<RemoveBookCommand>
         var book = await _bookRepository.GetBookAsync(command.Id, cancellationToken)
             ?? throw new BookWasntFoundException(command.Id);
 
-        _unitOfWork.Begin();
-        await _bookRepository.RemoveBookAsync(command.Id, cancellationToken);
-        await _unitOfWork.CommitAsync(cancellationToken);          
+        await _bookRepository.RemoveBookAsync(command.Id, cancellationToken);     
     }
 }

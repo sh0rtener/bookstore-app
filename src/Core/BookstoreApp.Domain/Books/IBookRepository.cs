@@ -4,7 +4,7 @@ public class BookFilter
 {
     public string? Author { get; set; }
     public string? Name { get; set; }
-    public BookStatus? Status { get; set; }
+    public string? Status { get; set; }
     public int Limit { get; set; } = 100;
     public int Skip { get; set; } = 0;
 }
